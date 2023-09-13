@@ -1,6 +1,13 @@
 options {
 	directory "/var/cache/bind";
 
+	{% if bind9_max_cache_ttl|default() %}
+	max-cache-ttl  {{bind9_max_cache_ttl}};
+	{% endif %}
+	{% if bind9_max_ncache_ttl|default() %}
+	max-ncache-ttl {{bind9_max_ncache_ttl}};
+	{% endif %}
+
 	// If there is a firewall between you and nameservers you want
 	// to talk to, you may need to fix the firewall to allow multiple
 	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
